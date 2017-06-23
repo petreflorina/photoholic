@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <base href="/">
+        <meta charset="UTF-8" />
+        <title>{% block title %}Photoholic{% endblock %}</title>
+
+        {% block stylesheets %}
+            <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic,800,800italic">
+            <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Oswald:400,300,700">
+            <link rel="stylesheet" href="assets/css/mvp.css">
+            <link rel="stylesheet" href="assets/css/bootstrap.css">
+            <link rel="stylesheet" href="assets/css/font-awesome.css">
+            <link rel="stylesheet" href="assets/css/font-awesome.min.css">
+            <link rel="stylesheet" href="assets/css/magnific-popup.css">
+            <link rel="stylesheet" href="assets/css/bootstrap-timepicker.css">
+            <link rel="stylesheet" href="assets/css/bootstrap-datepicker.css">
+            <link rel="stylesheet" href="assets/css/datepicker3.css">
+            <link rel="stylesheet" href="assets/css/select2.css">
+            <link rel="stylesheet" href="assets/css/select2-bootstrap.css">
+            <link rel="stylesheet" href="assets/css/jquery.simplecolorpicker.css">
+        {% endblock %}
+
+        {% block angular2 %}
+            <script src="node_modules/core-js/client/shim.min.js"></script>
+            <script src="node_modules/zone.js/dist/zone.js"></script>
+            <script src="node_modules/reflect-metadata/Reflect.js"></script>
+            <script src="node_modules/systemjs/dist/system.src.js"></script>
+            <!-- 2. Configure SystemJS -->
+            <script src="systemjs.config.js"></script>
+            <script>
+                System.import('app').catch(function(err){
+                    console.error(err);
+                });
+            </script>
+        {% endblock angular2 %}
+
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    </head>
+    <body>
+        {% block body %}
+        <photoholic></photoholic>
+        {% endblock %}
+        {% block javascripts %}
+            <script src="assets/js/jquery.js"></script>
+            <script src="assets/js/jquery.form.js"></script>
+            <script src="assets/js/bootstrap.js"></script>
+            <script src="assets/js/jquery.slimscroll.js"></script>
+            <script src="assets/js/select2.js"></script>
+            <script src="assets/js/select2.full.js"></script>
+            <script src="assets/js/icheck.js"></script>
+            <script src="assets/js/parsley.js"></script>
+            <script src="assets/js/bootstrap-timepicker.js"></script>
+            <script src="assets/js/bootstrap-datepicker.js"></script>
+            <script src="assets/js/fileinput.js"></script>
+            <script src="assets/js/jquery.simplecolorpicker.js"></script>
+            <script src="assets/js/mvp.js"></script>
+            <script src="assets/js/customjs.js"></script>
+            <script src="assets/js/jquery.magnific-popup.js"></script>
+            <script src="assets/js/mvpready-core.js"></script>
+            <script src="assets/js/mvpready-helpers.js"></script>
+            <script src="assets/js/mvpready-admin.js"></script>
+            <script src="assets/js/form-pickers.js"></script>
+        {% endblock %}
+    </body>
+</html>

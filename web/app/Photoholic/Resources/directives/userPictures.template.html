@@ -1,0 +1,59 @@
+<div *ngIf="entities" class="portlet-body">
+    <div class="table-responsive">
+
+        <div *ngIf="serverMessage" style="background: darkgrey">
+            <pre>
+                {{ serverMessage }}
+            </pre>
+        </div>
+
+        <table class="table table-striped table-bordered thumbnail-table">
+            <thead>
+            <tr>
+                <th style="width: 150px;">Image</th>
+                <th>Description</th>
+                <th>Uploaded At</th>
+                <th *ngIf="subjectId == parentEntity.id" class="text-center">Actions</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr *ngFor="let entity of entities; let i=index">
+                <td>
+                    <div class="thumbnail">
+                        <img [routerLink]="['../../picture', entity.id]"
+                             style="cursor:pointer;"
+                             src="{{entity?.path}}"
+                             width="125"
+                             alt="Gallery Image">
+                    </div> <!-- /.thumbnail -->
+                </td>
+
+                <td class="valign-middle">
+                    <a [routerLink]="['../../picture', entity?.id]">
+                        {{entity?.title}}
+                    </a>
+                    <p>{{entity?.description}}</p>
+                </td>
+
+                <td class="valign-middle"> {{entity?.createdAt}}</td>
+
+                <td *ngIf="subjectId == parentEntity.id" class="text-center valign-middle">
+                    <button (click)="onDelete(entity.id, i)"
+                            class="btn btn-xs btn-secondary"
+                            style="margin:5px; !important;"
+                            title="Delete">
+                        <i class="fa fa-times"></i>
+                    </button>
+                    <button [routerLink]="['../../picture/', entity?.id, 'form']"
+                            class="btn btn-xs btn-primary"
+                            title="Edit">
+                        <i class="fa fa-pencil"></i>
+                    </button>
+                </td>
+
+            </tr>
+            </tbody>
+        </table>
+    </div> <!-- /.table-responsive -->
+</div> <!-- /.portlet-body -->

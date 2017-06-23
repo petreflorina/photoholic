@@ -1,0 +1,142 @@
+<div class="content">
+    <div class="container">
+        <div class="portlet portlet-boxed">
+            <div class="portlet-body">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <h2>{{ entity?.title }}</h2>
+                        <div class="picture-container">
+                            <div class="profile-avatar">
+                                <img src="{{entity?.path}}"
+                                     class="img-center m-x-auto d-block img-responsive picture" alt="Profile Image">
+                            </div> <!-- /.profile-avatar -->
+                        </div> <!-- /.picture-container -->
+
+                        <br>
+
+                        <span class="text-muted">
+                            <a [routerLink]="['../../user/', userId]" routerLinkActive="active"
+                               style="cursor: pointer;">
+                                <i class="fa fa-user"></i> {{ entity?.createdBy.username }}
+                            </a>
+                            <i class="fa fa-camera-retro"></i> {{ entity?.createdBy.cameraModel }}
+                            <i class="fa fa-clock-o"> </i> {{ entity?.createdAt | date:'medium' }}
+                        </span>
+
+                        <hr>
+
+                        <div>
+                            <span *ngFor="let tag of entity?.tags;">
+                                <span class="label label-tertiary demo-element"
+                                      style="cursor:pointer; font-size: 14px;"
+                                      [routerLink]="['../../tag', tag.id]"
+                                      routerLinkActive="active"><i class="fa fa-tag" style="color:blue;"></i> {{ tag.name }}</span>
+                            </span>
+                        </div>
+
+                        <hr>
+                        <section class="demo-section">
+
+                            <div class="portlet portlet-boxed">
+
+                                <div class="portlet-header">
+                                    <h4 class="portlet-title">
+                                        Picture's details
+                                    </h4>
+                                </div> <!-- /.portlet-header -->
+
+                                <div class="portlet-body">
+
+                                    <ul id="myTab1" class="nav nav-tabs">
+                                        <li class="active">
+                                            <a href="#home" data-toggle="tab" aria-expanded="true">Description</a>
+                                        </li>
+
+                                        <li *ngIf="entity?.exifData" class="">
+                                            <a href="#profile" data-toggle="tab" aria-expanded="false">
+                                                Technical details</a>
+                                        </li>
+                                    </ul>
+
+                                    <div id="myTab1Content" class="tab-content">
+
+                                        <div class="tab-pane fade active in" id="home">
+                                            <br>
+                                            <br>
+
+                                            <p> {{entity?.description}} </p>
+                                        </div> <!-- /.tab-pane -->
+
+                                        <!--exif -->
+
+                                        <!--exif end-->
+                                        <br>
+                                        <br>
+
+                                        <div *ngIf="entity?.exifData" class="tab-pane fade" id="profile">
+                                            <div class="col-md-8 col-sm-5">
+                                                    <div class="portlet-header">
+                                                        <h4 class="portlet-title">
+                                                            Exif data
+                                                        </h4>
+                                                    </div> <!-- /.portlet-header -->
+
+                                                    <table class="table table-striped">
+                                                        <tbody>
+                                                        <tr *ngIf="entity?.exifData.ExposureTime">
+                                                            <th scope="row">Exposure Time</th>
+                                                            <td>{{ entity?.exifData.ExposureTime}}</td>
+                                                        </tr>
+
+                                                        <tr *ngIf="entity?.exifData.ISOSpeedRatings">
+                                                            <th scope="row">ISO</th>
+                                                            <td>{{entity?.exifData.ISOSpeedRatings }}</td>
+                                                        </tr>
+                                                        <tr *ngIf="entity?.exifData.FocalLengthIn35mmFilm">
+                                                            <th scope="row">Focal lenght</th>
+                                                            <td>{{entity?.exifData.FocalLengthIn35mmFilm }}</td>
+                                                        </tr>
+
+                                                        <tr *ngIf="entity?.exifData.COMPUTED.ApertureFNumber">
+                                                            <th scope="row">Aperture</th>
+                                                            <td>{{entity?.exifData.COMPUTED.ApertureFNumber }}</td>
+                                                        </tr>
+
+                                                        <tr *ngIf="entity?.exifData.Flash">
+                                                            <th scope="row">Flash</th>
+                                                            <td>{{entity?.exifData.Flash}}</td>
+                                                        </tr>
+
+                                                        <tr *ngIf="entity?.exifData.Model">
+                                                            <th scope="row">Camera model</th>
+                                                            <td>{{entity?.exifData.Model }}</td>
+                                                        </tr>
+
+                                                        <tr *ngIf="entity?.exifData.Copyright">
+                                                            <th scope="row">Copyright</th>
+                                                            <td>{{entity?.exifData.Copyright}}</td>
+                                                        </tr>
+                                                        </tbody>
+                                                    </table>
+                                            </div>
+                                        </div> <!-- /.tab-pane -->
+                                    </div> <!-- /.tab-content -->
+                                </div> <!-- /.portlet-body -->
+                            </div> <!-- /.portlet -->
+                        </section>
+
+                        <div *ngIf="user || entity?.numberOfComments > 0" class="heading-block">
+                            <hr>
+                            <h4>
+                                Comments
+                            </h4>
+                        </div> <!-- /.heading-block -->
+                        <list-comments [subjectId]="id" [parentEntity]="entity"></list-comments>
+                    </div> <!-- /.col -->
+                </div> <!-- /.row -->
+            </div> <!-- /.portlet-body -->
+        </div>
+    </div>
+</div>
+
+

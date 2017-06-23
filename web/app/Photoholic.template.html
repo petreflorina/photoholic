@@ -1,0 +1,94 @@
+<div id="wrapper">
+    <header class="navbar" role="banner" style="border-radius:0px;!important; margin-bottom:0px;!important;">
+        <div class="container">
+
+            <div class="navbar-header">
+                <a [routerLink]="['v-2']" routerLinkActive="active" class="navbar-brand">
+                    <i class="fa fa-camera-retro fa-2x" style="margin-top:10px;!important;"> Photoholic</i>
+                </a>
+            </div> <!-- /.navbar-header -->
+
+
+            <nav class="collapse navbar-collapse" role="navigation">
+                <ul class="nav navbar-nav navbar-right">
+
+                    <li><a [routerLink]="['v-2']" routerLinkActive="active">Homepage</a></li>
+                    <li *ngIf="user"><a [routerLink]="['v-2/picture/form']" routerLinkActive="active">Upload Picture</a></li>
+                    <li *ngIf="!user"><a  [routerLink]="['v-2/user/form']" routerLinkActive="active">Register</a></li>
+                    <li *ngIf="!user"><a href="/api/login">Log In</a></li>
+
+                    <li *ngIf="user" class="dropdown ">
+                        <a  class="dropdown-toggle" data-toggle="dropdown" href="javascript:;">
+                            {{user.firstLastName}} &nbsp;
+                            <i class="fa fa-user fa-lg"></i>
+                            <i class="fa fa-caret-down"></i>
+                        </a>
+
+                        <ul class="dropdown-menu" role="menu">
+                            <li>
+                                <a [routerLink]="['v-2/user', user?.id]">
+                                    My Profile
+                                </a>
+                            </li>
+                            <li class="divider"></li>
+
+                            <li>
+                                <a href="/logout">
+                                    <i class="fa fa-sign-out"></i>
+                                    &nbsp;&nbsp;Logout
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+        </div> <!-- /.container -->
+    </header>
+    <div class="mainnav">
+        <div class="container">
+            <a class="mainnav-toggle" data-toggle="collapse" data-target=".mainnav-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <i class="fa fa-bars"></i>
+            </a>
+
+            <nav class="collapse mainnav-collapse" role="navigation">
+                <ul class="mainnav-menu">
+                    <li><a [routerLink]="['v-2/tag', 3]" routerLinkActive="active">Portraits</a></li>
+                    <li><a [routerLink]="['v-2/tag', 4]" routerLinkActive="active">Nature</a></li>
+                    <li><a [routerLink]="['v-2/tag', 5]" routerLinkActive="active">Architecture</a></li>
+                    <li><a [routerLink]="['v-2/tag', 6]" routerLinkActive="active">Landscapes</a></li>
+                    <li class="dropdown ">
+                        <a  class="dropdown-toggle" data-toggle="dropdown" href="javascript:;">
+                            <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+                        </a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li *ngFor=" let tag of tags">
+                                <a *ngIf="tag.name != 'Portraits' && tag.name != 'Nature'
+                                    && tag.name != 'Architecture' && tag.name != 'Landscapes'"
+                                        [routerLink]="['v-2/tag', tag.id]" routerLinkActive="active">
+                                    <i class="fa fa-tags"></i>
+                                    {{tag.name}}
+                                </a>
+                            </li>
+                            <li *ngIf="user" >
+                                <br>
+                                <a href="/v-2/tag/form">
+                                    <i class="fa fa-plus"></i>
+                                    &nbsp;&nbsp;Add a tag
+                                </a>
+                            </li>
+                        </ul>
+                </ul>
+            </nav>
+        </div> <!-- /.container -->
+    </div>
+    <div>
+        <router-outlet></router-outlet>
+    </div>
+</div>
+
+<footer class="footer">
+    <div class="container">
+        <p class="pull-left">Copyright © 2016 Petre Florina.</p>
+    </div>
+</footer>

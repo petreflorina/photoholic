@@ -1,0 +1,88 @@
+<div class="content">
+    <div class="container">
+        <div *ngIf="serverMessage" style="background: darkgrey">
+            <pre>
+                {{ serverMessage }}
+            </pre>
+        </div>
+
+        <form #form="ngForm"
+              id="uploadForm"
+              class="form-horizontal"
+              method="post"
+              enctype="multipart/form-data">
+
+            <fieldset>
+                <div class="portlet portlet-boxed">
+                    <div class="portlet-header">
+                        <h4 class="portlet-title">
+                            Details
+                        </h4>
+                    </div> <!-- /.portlet-header -->
+
+                    <input type="hidden"
+                           class="form-control"
+                           id="user"
+                           name="user"
+                           value=" {{ user?.id }}"
+                           [(ngModel)]="formObject.user">
+
+                    <div class="portlet-body">
+                        <div class="form-group">
+                            <label class="control-label col-md-2">Title <span style="color:red">*</span> :</label>
+                            <div class="col-md-10">
+                                <input type="text"
+                                       class="form-control"
+                                       placeholder="Title"
+                                       id="title"
+                                       name="title"
+                                       [(ngModel)]="formObject.title">
+                            </div> <!-- /.col -->
+                        </div> <!-- /.form-group -->
+
+                        <div class="form-group">
+                            <label class="control-label col-md-2">Description:</label>
+                            <div class="col-md-10">
+                                <textarea rows="5"
+                                          cols="5"
+                                          class="form-control"
+                                          placeholder="Basic description"
+                                          id="description"
+                                          name="description"
+                                          [(ngModel)]="formObject.description">
+                                </textarea>
+                            </div> <!-- /.col -->
+                        </div> <!-- /.form-group -->
+
+                        <div *ngIf="id" class="form-group">
+                            <label class="control-label col-md-2">Tag:</label>
+                            <div class="col-md-10">
+                                <select                                        multiple="multiple"
+                                        name="tags"
+                                        class="form-control"
+                                        [(ngModel)]="formObject.tags"
+                                        id="tags">
+                                    <option></option>
+                                    <option *ngFor="let tag of tags" value={{tag.id}}>{{tag.name}}</option>
+                                </select>
+                            </div> <!-- /.col -->
+                        </div>
+
+                        <span style="color:grey" class="pull-left">The fields with <span style="color:red">*</span> are mandatory</span>
+                    </div> <!-- /.portlet -->
+
+                    <picture-upload *ngIf="!id"></picture-upload>
+
+                    <div class="pull-right" style="margin-top:10px;">
+                        <span *ngIf="formObject.description || formObject.title" (click)="form.reset()" class="btn btn-xs btn-danger">Cancel</span>
+                        <button *ngIf="id" (click)="onSubmit(formObject)" type="submit"
+                                class="btn btn-xs btn-success submit">
+                            Submit
+                        </button>
+                        <button *ngIf="!id" type="submit" class="btn btn-xs btn-success submit">Submit</button>
+                    </div>
+                </div> <!-- /.portlet-body -->
+            </fieldset>
+        </form>
+    </div>
+</div>

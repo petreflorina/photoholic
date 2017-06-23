@@ -1,0 +1,45 @@
+<div class="content">
+    <div class="container">
+        <div class="portlet portlet-boxed">
+            <div class="portlet portlet-boxed">
+
+                <div class="portlet-header">
+                    <h3 class="portlet-title">{{ entity?.name}}</h3>
+                </div> <!-- /.portlet-header -->
+
+                <div class="portlet-body">
+
+                    <div class="row">
+                        <div *ngFor="let picture of entity?.pictures">
+                            <div class="col-md-3" style="height: 320px;">
+                                <div class="thumbnail">
+                                    <img [routerLink]="['../../picture/', picture.id]"
+                                         src="{{ picture?.path }}"
+                                         style="width: 100%; cursor:pointer"
+                                         alt="Gallery Image">
+
+                                    <div class="caption">
+                                        <h3 style="word-wrap: break-word;">{{picture?.title}}</h3>
+                                    </div>
+
+                                    <div class="thumbnail-footer">
+                                        <div class="pull-right">
+                                            <span>
+                                                <i class="fa fa-clock-o"></i>
+                                                {{picture?.createdAt |date:'medium'}}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> <!-- /.col -->
+                        </div>
+
+                    </div> <!-- /.row -->
+
+                </div> <!-- /.portlet-body -->
+
+            </div>
+
+        </div>
+    </div>
+</div>

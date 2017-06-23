@@ -1,0 +1,55 @@
+<div class="content">
+    <div class="container">
+        <div class="portlet portlet-boxed">
+
+            <div class="portlet-body">
+
+                <div class="row">
+
+                    <div class="col-xs-12">
+
+                        <br class="visible-xs">
+
+                        <h3><i class="fa fa-street-view"></i>  {{ entity?.firstLastName }}</h3>
+
+                        <button *ngIf="user?.id == entity?.id" [routerLink]="['form']" routerLinkActive="active"
+                                class="btn btn-xs btn-primary pull-right">
+                            <i class="fa fa-pencil"></i>
+                        </button>
+
+                        <h6 class="text-muted"> Member since {{ entity?.createdAt | date:'fullDate' }} </h6>
+
+                        <hr>
+
+                        <ul class="icons-list">
+                            <li><i class="fa fa-user"></i>  {{ entity?.username }}</li>
+                            <li><i class="fa fa-envelope"></i>  {{ entity?.email}}</li>
+                            <li><i class="fa fa-camera"></i>  {{ entity?.cameraModel }}</li>
+                            <li><i class="fa fa-clock-o"></i> Photographer since {{ entity?.photographerSince |
+                                date:'mediumDate' }}
+                            </li>
+                            <li *ngIf="entity?.numberOfPictures != 1"><i class="fa fa-picture-o"></i>  {{ entity?.numberOfPictures}} pictures</li>
+                            <li *ngIf="entity?.numberOfPictures == 1"><i class="fa fa-picture-o"></i>  {{ entity?.numberOfPictures}} picture</li>
+                        </ul>
+
+                    </div> <!-- /.col -->
+
+                </div> <!-- /.row -->
+
+                <br class="xs-20">
+
+            </div> <!-- /.portlet-body -->
+
+            <br class="xs-20">
+
+
+        </div>
+        <div *ngIf="entity?.numberOfPictures" class="portlet portlet-boxed">
+
+            <div class="portlet-header">
+                <h3 class="portlet-title"><u>{{entity?.firstName}}'s Gallery</u></h3>
+            </div> <!-- /.portlet-header -->
+            <list-user-pictures [subjectId]="id" [parentEntity]="entity"></list-user-pictures>
+        </div>
+    </div>
+</div>

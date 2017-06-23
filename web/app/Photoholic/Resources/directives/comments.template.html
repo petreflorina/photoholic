@@ -1,0 +1,61 @@
+<form *ngIf="user" #form="ngForm" class="share-widget clearfix">
+    <textarea class="form-control share-widget-textarea"
+              rows="3"
+              placeholder="Type a nice comment..."
+              tabindex="1"
+              name="content"
+              [(ngModel)]="formObject.content">
+    </textarea>
+
+    <input type="hidden" name="picture" [(ngModel)]="formObject.picture">
+
+    <div class="share-widget-actions">
+        <div class="pull-right">
+            <button *ngIf="formObject.content" (click)="form.reset()" type="button" class="btn btn-xs btn-danger">
+                Cancel
+            </button>
+            <button (click)="onSubmit(formObject)" type="submit" class="btn btn-xs btn-success">Submit</button>
+        </div>
+    </div> <!-- /.share-widget-actions -->
+</form> <!-- /.share-widget -->
+
+<div *ngIf="serverMessage && hideServerMessage" style="background: green; margin-top:5px;">
+    <span style="color:white;text-align: center;">{{ serverMessage }}</span>
+</div>
+<div *ngIf="entity">
+    <div *ngFor="let comment of entity?.comments; let i=index">
+        <div class="feed-item feed-item-idea">
+            <div class="feed-icon bg-primary">
+                <i class="fa fa-comment-o"></i>
+            </div> <!-- /.feed-icon -->
+
+            <div class="feed-subject">
+            <span *ngIf="user?.id == parentEntity?.createdBy.id " style="cursor:pointer"
+                  title="Delete"
+                  (click)="onDelete(comment?.id, i)"
+                  class="pull-right"><i class="fa fa-times fa-lg"></i>
+            </span>
+                <a [routerLink]="['../../user/', comment?.createdBy.id]" routerLinkActive="active"
+                   style="cursor:pointer">
+                    {{comment.createdBy?.firstLastName }}
+                </a>
+            </div> <!-- /.feed-subject -->
+
+            <div class="feed-content">
+                <ul class="icons-list">
+                    <li>
+                        <i class="icon-li fa fa-quote-left"></i>
+                        {{ comment?.content }}
+                    </li>
+                </ul>
+            </div> <!-- /.feed-content -->
+
+            <div class="feed-actions">
+            <span class="pull-right">
+                <i class="fa fa-clock-o"></i>
+                {{ comment?.createdAt | date:'medium' }}
+            </span>
+            </div> <!-- /.feed-actions -->
+        </div> <!-- /.feed-item -->
+    </div>
+</div>

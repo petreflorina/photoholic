@@ -1,0 +1,29 @@
+<div class="container">
+    <div class="content">
+        <div class="portlet portlet-boxed">
+
+            <div class="portlet-header">
+                <h4 class="portlet-title">
+                    Photoholic tags
+                </h4>
+            </div> <!-- /.portlet-header -->
+
+            <div class="portlet-body">
+                <div *ngFor=" let tag of entities" class="panel-group accordion-panel" id="accordion-paneled">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a class="accordion-toggle "
+                               data-parent="#accordion-paneled"
+                               routerLinkActive="active"
+                               [routerLink] = "['../tag/', tag.id]"
+                               aria-expanded="false"><i class="fa accordion-caret"></i>
+                               {{tag.name}}
+                            </a>
+                        </h4>
+                    </div> <!-- /.panel-heading -->
+                </div> <!-- /.accordion -->
+            </div> <!-- /.portlet-body -->
+
+        </div>
+    </div>
+</div>

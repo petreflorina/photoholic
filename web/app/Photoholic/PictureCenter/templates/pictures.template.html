@@ -1,0 +1,61 @@
+<div class="content">
+    <div class="container">
+        <div class="portlet portlet-boxed">
+
+            <div class="portlet-header">
+                <h3 class="portlet-title"><u>Gallery</u></h3>
+            </div> <!-- /.portlet-header -->
+
+            <div class="portlet-body">
+
+                <div class="row">
+
+                    <div *ngFor="let entity of entities;">
+
+                        <div class="col-xs-12 col-md-3 portlet" style="height: 320px;">
+                            <div class="thumbnail">
+                                <img [routerLink]="['picture/', entity.id]"
+                                     routerLinkActive="active"
+                                     src="{{ entity?.path }}"
+                                     style="width: 100%; cursor:pointer"
+                                     alt="Gallery Image">
+
+                                <div class="portlet-header">
+                                    <h3 style="word-wrap: break-word; !important;">{{ entity.title }}</h3>
+                                </div>
+
+                                <div class="thumbnail-footer">
+                                    <div class="pull-left">
+                                        <a [routerLink]="['user/', entity.userID]"
+                                           routerLinkActive="active">
+                                            <i class="fa fa-user"></i>
+                                            {{ entity.username }}
+                                        </a>
+                                        <a title="Number Of Comments">
+                                            {{ entity.numberOfComments }}
+                                            <i class="fa fa-comments-o"></i>
+                                        </a>
+                                        <a title="Number Of Tags">
+                                            {{ entity.numberOfTags }}
+                                            <i class="fa fa-tags"></i>
+                                        </a>
+                                    </div>
+                                    <div class="pull-right">
+                                        <a title="{{ entity.createdAt }}">
+                                            {{ entity.createdAt | date:'d MMM' }}
+                                            <i class="fa fa-clock-o"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> <!-- /.col -->
+
+                    </div>
+
+                </div> <!-- /.row -->
+
+            </div> <!-- /.portlet-body -->
+
+        </div>
+    </div>
+</div>

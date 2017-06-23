@@ -1,0 +1,21 @@
+logout:
+    path: /logout
+api:
+    resource: "@AppBundle/Controller/"
+    type:     annotation
+    prefix:   /api
+    requirements:
+        url: /api/.*$
+
+client:
+    path:     /v-2/{dummy}
+    defaults: { _controller: AppBundle:Default:default, dummy: index }
+    requirements:
+        dummy: .*$
+
+remove_trailing_slash:
+    path: /{url}
+    defaults: { _controller: AppBundle:Default:removeTrailingSlash }
+    requirements:
+        url: .*/$
+    methods: [GET]
